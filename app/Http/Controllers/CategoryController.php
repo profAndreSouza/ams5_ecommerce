@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     
     function index(Request $request) {
@@ -19,10 +20,6 @@ class ProductController extends Controller
         return "salvar";
     }
     
-    function show(Request $request) {
-        return "mostrar";
-    }
-    
     function edit(Request $request) {
         return "editar";
     }
@@ -35,7 +32,4 @@ class ProductController extends Controller
         return "remover";
     }
     
-    function listProducts(Request $request) {
-        return view('product.listAll');
-    }
 }

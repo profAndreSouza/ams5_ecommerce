@@ -11,7 +11,7 @@ use Illuminate\Facades\Validator;
 
 class UserController extends Controller
 {
-    function showFormRegister(Request $request) {
+    function index(Request $request) {
         return view('register');
     }
 

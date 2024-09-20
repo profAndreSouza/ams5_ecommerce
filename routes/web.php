@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CategoryController;
 
 // Página inicial do e-commerce (lista de produtos)
 Route::get('/', [ProductController::class, 'index'])->name('home');
@@ -15,8 +16,10 @@ Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])->name(
 Route::get('/logout', [AuthController::class, 'logout']);
 
 // Registro 
-Route::get('/register', [UserController::class, 'showFormRegister']);
-Route::post('/register', [UserController::class, 'register'])->name('register');
+    Route::prefix('register')->group(function () {
+    Route::get('/', [UserController::class, 'index']);
+    Route::post('/', [UserController::class, 'register'])->name('register');
+});
 
 // Rotas de produtos
 Route::prefix('products')->group(function () {
