@@ -8,7 +8,9 @@ class ProductController extends Controller
 {
     
     function index(Request $request) {
-        return "index";
+
+        return view('products.index');
+        
     }
     
     function create(Request $request) {
@@ -34,8 +36,5 @@ class ProductController extends Controller
     function destroy(Request $request) {
         return "remover";
     }
-    
-    function listProducts(Request $request) {
-        return view('product.listAll');
-    }
+
 }

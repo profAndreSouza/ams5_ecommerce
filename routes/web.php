@@ -13,12 +13,18 @@ Route::get('/', [ProductController::class, 'index'])->name('home');
 
 // Autenticação
 Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])->name('login');
-Route::get('/logout', [AuthController::class, 'logout']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Registro 
-    Route::prefix('register')->group(function () {
+Route::prefix('register')->group(function () {
     Route::get('/', [UserController::class, 'index']);
     Route::post('/', [UserController::class, 'register'])->name('register');
+});
+
+// Rotas Protegidas - somente usuários autenticados
+Route::middleware('auth')->group(function () {
+    // Perfil do Usuário
+    Route::get('/profile', [UserController::class, 'profile'])->name('users.profile');
 });
 
 // Rotas de produtos

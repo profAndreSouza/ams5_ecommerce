@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Facades\Hash;
-use Illuminate\Facades\Auth;
-use Illuminate\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class UserController extends Controller
 {
     function index(Request $request) {
-        return view('register');
+        return view('users.register');
     }
 
     function register(Request $request) {
@@ -38,6 +39,6 @@ class UserController extends Controller
     }
 
     function profile(Request $request) {
-        return "perfil";
+        return view('users.profile');
     }
 }
