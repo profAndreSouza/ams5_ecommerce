@@ -2,6 +2,12 @@
 
 @section("content")
 
-Mostrar Categorias
+
+<div class="container">
+    <div class="align-self-center">
+        <h3 class="text-center mb-4">{{ $category->name }}</h3>
+        <p>{{ $category->description }}</p>
+    </div>
+</div>
 
 @endsection

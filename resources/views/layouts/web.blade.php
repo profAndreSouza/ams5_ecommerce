@@ -14,11 +14,17 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
-                <img src="assets/img/logo.png" alt="Casca de Bala - Ecommerce" class="logo">
+                <img src="/assets/img/logo.png" alt="Casca de Bala - Ecommerce" class="logo">
             </a>
             @auth
             <h3>Bem vindo {{ Auth::user()->name }}</h3>
             @endauth
+            <div>
+                <form method="get" action="{{ route('product.search') }}">
+                    <input type="text" name="q" placeholder="Pesquisar" />
+                    <input type="submit" value="Procurar" />
+                </form>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -28,7 +34,10 @@
                         <a class="nav-link active" aria-current="page" href="#">Início</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Produtos</a>
+                        <a class="nav-link" href="{{ route('category.index') }}">Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('product.index') }}">Produtos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Carrinho</a>

@@ -2,23 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     
     function index(Request $request) {
-
-        return view('products.index');
+        $products = Product::all();
+        return view('products.index', compact('products'));
         
+    }
+
+    function search(Request $request) {
+        $query = $request->query('q');
+        $products = Product::where('name', 'like', '%' . $query . '%')
+                    ->orwhere('description', 'like', '%' . $query . '%')
+                    ->get();
+
+        return view('products.index', compact('products'));
     }
     
     function create(Request $request) {
-        return "criar";
+        $categories = Category::all();
+        return view('products.create', compact('categories'));
+
     }
     
     function store(Request $request) {
-        return "salvar";
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required'
+        ]);
+
+        $product = new Product($request->only('name', 'description', 'price'));
+        $product->category_id = $request->category;
+        $product->save();
+
+        return redirect()->route('product.index');
     }
     
     function show(Request $request) {
