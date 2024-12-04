@@ -26,22 +26,36 @@ class ProductController extends Controller
     
     function create(Request $request) {
         $categories = Category::all();
-        return view('products.create', compact('categories'));
+        return view('products.create2', compact('categories'));
 
     }
     
     function store(Request $request) {
 
-        $request->validate([
+        // $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        //     'price' => 'required'
+        // ]);
+
+        // $product = new Product($request->only('name', 'description', 'price'));
+        // $product->category_id = $request->category;
+        // $product->save();
+
+
+        $validatedData = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'category.name' => 'required',
+            'category.description' => 'required'
         ]);
 
+        $category = Category::create($validatedData['category']);
         $product = new Product($request->only('name', 'description', 'price'));
-        $product->category_id = $request->category;
-        $product->save();
-
+        $category->products()->save($product);
+        
+        
         return redirect()->route('product.index');
     }
     

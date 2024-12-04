@@ -5,7 +5,9 @@
 
 <div class="container">
             <div class="row text-center">
-                <h2 class="mb-5">Produtos</h2>
+                <h2 class="mb-5">Produtos 
+                    <a href="{{ route('product.create') }}" class="btn btn-primary btn-lg">Cadastrar</a>
+                </h2>              
                 
                 @foreach ($products as $product)
                 <div class="col-md-4">
